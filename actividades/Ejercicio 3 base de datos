@@ -1,0 +1,97 @@
+CREATE DATABASE IF NOT EXISTS gimnasio_sena;
+USE gimnasio_sena;
+
+CREATE TABLE clientes (
+    id_cliente INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    edad INT,
+    genero ENUM('M', 'F'),
+    fecha_registro DATE
+);
+
+CREATE TABLE entrenadores (
+    id_entrenador INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    especialidad VARCHAR(50),
+    experiencia_anios INT
+);
+
+CREATE TABLE clases (
+    id_clase INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_clase VARCHAR(100) NOT NULL,
+    cupos INT,
+    id_entrenador INT,
+    FOREIGN KEY (id_entrenador) REFERENCES entrenadores(id_entrenador)
+);
+
+CREATE TABLE reservas (
+    id_reserva INT PRIMARY KEY AUTO_INCREMENT,
+    id_cliente INT,
+    id_clase INT,
+    fecha_reserva DATE,
+    estado ENUM('ACTIVA', 'CANCELADA', 'FINALIZADA'),
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
+    FOREIGN KEY (id_clase) REFERENCES clases(id_clase)
+);
+
+INSERT INTO clientes (nombre, edad, genero, fecha_registro) VALUES
+('Carlos Pérez', 30, 'M', '2023-03-05'),
+('Diana Gómez', 28, 'F', '2023-04-20'),
+('Andrés López', 35, 'M', '2023-05-18'),
+('Sofía Méndez', 22, 'F', '2023-06-01');
+
+INSERT INTO entrenadores (nombre, especialidad, experiencia_anios) VALUES
+('Felipe García', 'CrossFit', 5),
+('Marta Ruiz', 'Yoga', 8),
+('Camilo Ortiz', 'Boxeo', 4),
+('Tatiana López', 'Pilates', 6);
+
+INSERT INTO clases (nombre_clase, cupos, id_entrenador) VALUES
+('CrossFit Avanzado', 10, 1),
+('Yoga Relajante', 15, 2),
+('Boxeo Intensivo', 12, 3),
+('Pilates Funcional', 10, 4);
+
+INSERT INTO reservas (id_cliente, id_clase, fecha_reserva, estado) VALUES
+(1, 1, '2023-07-10', 'FINALIZADA'),
+(2, 2, '2023-07-12', 'CANCELADA'),
+(3, 3, '2023-08-01', 'ACTIVA'),
+(4, 4, '2023-08-15', 'ACTIVA'),
+(5, 2, '2023-08-20', 'FINALIZADA');
+
+-- Aquí se le define el orden de la lista se organice de la A a la Z
+SELECT *
+FROM clientes
+ORDER BY nombre ASC;
+
+-- Filtra a los clientes que mínimo tenga 25 años
+SELECT *
+FROM clientes
+WHERE edad > 25;
+
+-- Filtra las clases con mínimo de 10 cupos cada una
+SELECT *
+FROM clases
+WHERE cupos > 10;
+
+-- Muestra las subs activas
+SELECT *
+FROM reservas
+WHERE estado = 'ACTIVA'
+ORDER BY fecha_reserva DESC
+LIMIT 1;
+
+-- Entrenadores con 5 años o mas de experiencia
+SELECT *
+FROM entrenadores
+WHERE experiencia_anios > 5;
+
+-- 
+SELECT genero, COUNT(*) AS total
+FROM clientes
+GROUP BY genro;
+
+--
+SELECT AVG(edad) AS promedio_edad
+
+
