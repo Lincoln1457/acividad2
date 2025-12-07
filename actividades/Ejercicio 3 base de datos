@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS gimnasio_sena;
+CREATE DATABASE gimnasio_sena;
 USE gimnasio_sena;
 
 CREATE TABLE clientes (
