@@ -1,0 +1,59 @@
+CREATE TABLE usuario (
+    id_usuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre varchar(300) NOT NULL,
+    edad INT NOT NULL,
+    email varchar(500),
+    telefono INT(11) NOT NULL,
+    tipoDoc varchar (200) NOT NULL,
+    numDoc varchar(200) NOT NULL,
+    estadoCivil varchar(100),
+    genero varchar(300) NOT NULL,
+    empleo varchar(200),
+    ciudad varchar(200)NOT NULL,
+    estatura INT NOT NULL    
+);
+
+CREATE TABLE roles (
+    id_rol INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nomRol varchar(300) NOT NULL,
+    actor varchar(200)
+);
+
+CREATE TABLE libro (
+    id_libro INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nomLib varchar(400) NOT NULL,
+    genero_libro varchar(300),
+    autor varchar(200) NOT NULL,
+    estanteria INT NOT NULL
+);
+
+INSERT INTO usuario values(
+    null,
+    'Pedro Perez',
+    28,
+    'ped@gmal.com',
+    317283786,
+    'Permiso de permanencia',
+    98765456789,
+    'Viudo',
+    'Femenino',
+    'Administrador de nubes del cielo',
+    'Cali',
+    176
+);
+
+INSERT INTO roles value(
+    null,
+    'Administrador',
+    "nosé"
+);
+
+INSERT INTO libro value(
+    null,
+    'La Dimensión del Olvido',
+    'Fantasia',
+    'Ingrid Abisambra',
+    23
+);
+
+SHOW TABLES;
